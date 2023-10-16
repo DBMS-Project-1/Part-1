@@ -6,21 +6,24 @@ CREATE TABLE IF NOT EXISTS User (
     LastName VARCHAR(50) NOT NULL,
     Address VARCHAR(100),
     City VARCHAR(50),
-    State CHAR(2),  -- Changed to CHAR for state abbreviation
-    ZipCode VARCHAR(10),
+    State CHAR(2),
+    ZipCode VARCHAR(5),
     CreditCardNumber VARCHAR(16),
-    ExpirationDate DATE,
-    CVV CHAR(3),     -- Changed to CHAR for CVV
-    Email VARCHAR(100)
+    ExpirationDate CHAR(6),
+    CVV CHAR(3),
+    PhoneNumber CHAR(10),
+    Email VARCHAR(100),
+    Password VARCHAR(255) NOT NULL
 );
 
-INSERT INTO User (FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, ExpirationDate, CVV, Email)
+INSERT INTO User (FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, ExpirationDate, CVV, Email, Password)
 VALUES 
-	('susie', 'Guzman', 'whatever street', 'detroit', 'MI', '48202', '1000123412341234', '2000-06-27', '1234', 'susie@gmail.com'),
-    ('Sophie', 'Pierce', 'yolos street', 'ides', 'CM', '24680', '1000246824682468', '1999-06-15', '2468', 'sophie@gmail.com'),
-    ('Angelo', 'Francis', 'egypt street', 'lolas', 'DT', '13579', '1000468014680134680', '2021-06-14', '4680', 'angelo@gmail.com'),
-    ('Rudy', 'Smith', 'sign street', 'samo ne tu', 'MH', '09876', '1000123412341234', '1706-06-05', '1234', 'rudy@gmail.com'),
-    ('Jeannette', 'Stone', 'snoop street', 'kojik', 'HW', '87654', '1000098109810981', '2001-04-24', '0981', 'jeannette@gmail.com'),
-    ('default', 'default', 'Default', 'Default', '0', '00000', '1000000000000000', '2021-01-01', '000', 'root');
+    ('Susie', 'Guzman', 'Whatever Street', 'Detroit', 'MI', '48202', '1000123412341234', '205066', '124', 'susie@gmail.com', 'password123'),
+    ('Sophie', 'Pierce', 'Yolos Street', 'Ides', 'CM', '24680', '1000246824682468', '196565', '268', 'sophie@gmail.com', 'securepass'),
+    ('Angelo', 'Francis', 'Egypt Street', 'Lolas', 'DT', '13579', '1000468014680180', '201566', '460', 'angelo@gmail.com', 'secret123'),
+    ('Rudy', 'Smith', 'Sign Street', 'Samo Ne Tu', 'MH', '09876', '1000123412341234', '170566', '134', 'rudy@gmail.com', 'userpass'),
+    ('Jeannette', 'Stone', 'Snoop Street', 'Kojik', 'HW', '87654', '1000098109810981', '205166', '081', 'jeannette@gmail.com', 'mypassword'),
+    ('Default', 'Default', 'Default', 'Default', '0', '00000', '1000000000000000', '205261', '000', 'root', 'pass1234');
 
 SELECT * FROM User;
+delete from User

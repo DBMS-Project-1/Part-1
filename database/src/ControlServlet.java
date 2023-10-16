@@ -120,22 +120,24 @@ public class ControlServlet extends HttpServlet {
 	    }
 	           
 	    private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-	    	String email = request.getParameter("email");
-	   	 	String firstName = request.getParameter("firstName");
-	   	 	String lastName = request.getParameter("lastName");
-	   	 	String password = request.getParameter("password");
-	   	 	String birthday = request.getParameter("birthday");
-	   	 	String adress_street_num = request.getParameter("adress_street_num"); 
-	   	 	String adress_street = request.getParameter("adress_street"); 
-	   	 	String adress_city = request.getParameter("adress_city"); 
-	   	 	String adress_state = request.getParameter("adress_state"); 
-	   	 	String adress_zip_code = request.getParameter("adress_zip_code"); 	   	 	
-	   	 	String confirm = request.getParameter("confirmation");
+        	String firstName = request.getParameter("FirstName");
+        	String lastName = request.getParameter("LastName");
+        	String address = request.getParameter("Address"); 
+        	String city = request.getParameter("City"); 
+        	String state = request.getParameter("State"); 
+        	String zip_code = request.getParameter("ZipCode"); 
+        	String credit_card_number = request.getParameter("CreditCardNumber");
+        	String expiration_date = request.getParameter("ExpirationDate");
+        	String cvv = request.getParameter("CVV");
+        	String phoneNumber = request.getParameter("PhoneNumber");
+        	String email = request.getParameter("Email"); 
+        	String password = request.getParameter("Password"); 	   	 	
+	   	 	String confirm = request.getParameter("Confirmation");
 	   	 	
 	   	 	if (password.equals(confirm)) {
 	   	 		if (!userDAO.checkEmail(email)) {
 		   	 		System.out.println("Registration Successful! Added to database");
-		            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0);
+		            user users = new user(firstName, lastName, address, city, state, zip_code, credit_card_number, expiration_date, cvv, phoneNumber, email, password);
 		   	 		userDAO.insert(users);
 		   	 		response.sendRedirect("login.jsp");
 	   	 		}
@@ -154,24 +156,6 @@ public class ControlServlet extends HttpServlet {
 	    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	    	currentUser = "";
         		response.sendRedirect("login.jsp");
-        	}
-	
-	    
-
-	     
-        
-	    
-	    
-	    
-	    
-	    
+        	}   
 }
 	        
-	        
-	    
-	        
-	        
-	        
-	    
-
-

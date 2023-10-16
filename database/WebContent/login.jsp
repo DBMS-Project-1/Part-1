@@ -13,7 +13,7 @@
 		<form action="login" method="post">
 			<table border="1" cellpadding="5">
 				<tr>
-					<th>Username: </th>
+					<th>Email: </th>
 					<td>
 						<input type="text" name="email" size="45" autofocus>
 					</td>
