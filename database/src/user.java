@@ -7,7 +7,7 @@ public class user
 	    protected String State;
 	    protected String ZipCode;
 	    protected String CreditCardNumber;
-	    protected String Expiration_Date;
+	    protected String ExpirationDate;
 	    protected String CVV;
 	    protected String PhoneNumber;
 	    protected String Email;
@@ -39,7 +39,7 @@ public class user
 	        this.State = State;
 	        this.ZipCode = ZipCode;
 	        this.CreditCardNumber= CreditCardNumber;
-	        this.Expiration_Date= expiration_date;
+	        this.ExpirationDate= expiration_date;
 	        this.CVV = CVV;
 	        this.PhoneNumber = phoneNumber;
 	        this.Password = Password;
@@ -76,7 +76,7 @@ public class user
 	    public String getState() {
 	        return State;
 	    }
-	    public void setAdress_city(String state) {
+	    public void setState(String state) {
 	        this.State = state;
 	    }
 	    public String getZipCode() {
@@ -93,7 +93,10 @@ public class user
 	    }
 	    
 	    public String getExpirationDate() {
-	        return Expiration_Date;
+	        return ExpirationDate;
+	    }
+	    public void setExpirationDate(String expirationDate) {
+	        this.ExpirationDate = expirationDate;
 	    }
 	    
 	    public String getCVV() {

@@ -275,7 +275,7 @@ public class userDAO
 					        "DROP TABLE IF EXISTS User; ",
 					        ("CREATE TABLE IF NOT EXISTS User ( " +
 					            "CustomerID INT AUTO_INCREMENT PRIMARY KEY, " + 
-					            "FirstName VARCHAR(50) NOT NULL,, " +
+					            "FirstName VARCHAR(50) NOT NULL, " +
 					            "LastName VARCHAR(50) NOT NULL, " +
 					            "Address VARCHAR(100), " +
 					            "City VARCHAR(50), " +
@@ -285,20 +285,20 @@ public class userDAO
 					            "ExpirationDate VARCHAR(6), "+ 
 					            "CVV CHAR(3), "+ 
 					            "PhoneNumber CHAR(10)," +
-					            "Email VARCHAR(100) "+ 
+					            "Email VARCHAR(100), "+ 
 					            "Password VARCHAR(255) NOT NULL ")
         					};
-        String[] TUPLES = {("INSERT INTO User (FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, ExpirationDate, CVV, Email, Password)"+
-        			"values ('John', 'Doe', '123 Main St', 'New York', 'NY', '10001', '1234123412341234', '2000-01-15', '789', 'john@example.com', 'johnpass123'),\n" +
-        			"    ('Alice', 'Johnson', '456 Elm St', 'Los Angeles', 'CA', '90001', '5678567856785678', '1998-03-20', '456', 'alice@example.com', 'alicepass123'),\n" +
-        			"    ('Michael', 'Smith', '789 Oak St', 'Chicago', 'IL', '60601', '9876987698769876', '2002-05-10', '234', 'michael@example.com', 'michaelpass123'),\n" +
-        			"    ('Emily', 'Brown', '321 Pine St', 'Houston', 'TX', '77001', '7654765476547654', '1995-11-30', '654', 'emily@example.com', 'emilypass123'),\n" +
-        			"    ('David', 'Lee', '654 Birch St', 'Miami', 'FL', '33101', '8765876587658765', '1990-08-12', '321', 'david@example.com', 'davidpass123'),\n" +
-        			"    ('Sophia', 'Martinez', '987 Cedar St', 'San Francisco', 'CA', '94101', '3456345634563456', '2005-02-25', '987', 'sophia@example.com', 'sophiapass123'),\n" +
-        			"    ('Liam', 'Garcia', '741 Willow St', 'Dallas', 'TX', '75201', '2345234523452345', '1997-07-05', '567', 'liam@example.com', 'liampass123'),\n" +
-        			"    ('Olivia', 'Perez', '369 Redwood St', 'Atlanta', 'GA', '30301', '4321432143214321', '2001-04-15', '123', 'olivia@example.com', 'oliviapass123'),\n" +
-        			"    ('Noah', 'Rodriguez', '852 Sycamore St', 'Seattle', 'WA', '98101', '8765876587658765', '1992-09-08', '876', 'noah@example.com', 'noahpass123'),\n" +
-        			"    ('Ava', 'Sanchez', '123 Pineapple St', 'Denver', 'CO', '80201', '7654765476547654', '1994-12-10', '345', 'ava@example.com', 'avapass123');")
+        String[] TUPLES = {("INSERT INTO User (FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, ExpirationDate, CVV, PhoneNumber, Email, Password)"+
+        			"values (('John', 'Doe', '123 Main St', 'New York', 'NY', '10001', '1234123412341234', '2000-01-15', '789', 'john@example.com', 'johnpass123'),\n"
+        			+ "    ('Alice', 'Johnson', '456 Elm St', 'Los Angeles', 'CA', '90001', '5678567856785678', '1998-03-20', '456', 'alice@example.com', 'alicepass123'),\n"
+        			+ "    ('Michael', 'Smith', '789 Oak St', 'Chicago', 'IL', '60601', '9876987698769876', '2002-05-10', '234', 'michael@example.com', 'michaelpass123'),\n"
+        			+ "    ('Emily', 'Brown', '321 Pine St', 'Houston', 'TX', '77001', '7654765476547654', '1995-11-30', '654', 'emily@example.com', 'emilypass123'),\n"
+        			+ "    ('David', 'Lee', '654 Birch St', 'Miami', 'FL', '33101', '8765876587658765', '1990-08-12', '321', 'david@example.com', 'davidpass123'),\n"
+        			+ "    ('Sophia', 'Martinez', '987 Cedar St', 'San Francisco', 'CA', '94101', '3456345634563456', '2005-02-25', '987', 'sophia@example.com', 'sophiapass123'),\n"
+        			+ "    ('Liam', 'Garcia', '741 Willow St', 'Dallas', 'TX', '75201', '2345234523452345', '1997-07-05', '567', 'liam@example.com', 'liampass123'),\n"
+        			+ "    ('Olivia', 'Perez', '369 Redwood St', 'Atlanta', 'GA', '30301', '4321432143214321', '2001-04-15', '123', 'olivia@example.com', 'oliviapass123'),\n"
+        			+ "    ('Noah', 'Rodriguez', '852 Sycamore St', 'Seattle', 'WA', '98101', '8765876587658765', '1992-09-08', '876', 'noah@example.com', 'noahpass123'),\n"
+        			+ "    ('Ava', 'Sanchez', '123 Pineapple St', 'Denver', 'CO', '80201', '7654765476547654', '1994-12-10', '345', 'ava@example.com', 'avapass123');")
 			    	};
         
         //for loop to put these in database
