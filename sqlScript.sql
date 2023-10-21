@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS User (
 INSERT INTO User (FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, ExpirationDate, CVV, Email, Password)
 VALUES 
     ('Susie', 'Guzman', 'Whatever Street', 'Detroit', 'MI', '48202', '1000123412341234', '205066', '124', 'susie@gmail.com', 'password123'),
-    ('Sophie', 'Pierce', 'Yolos Street', 'Ides', 'CM', '24680', '1000246824682468', '196565', '268', 'sophie@gmail.com', 'securepass'),
+    ('Sophie', 'Pierce', 'Yolos Street', 'Ides', 'CM', '24680', '1000246824682468', '196565', '268', 'David Smith', 'pass1234'),
     ('Angelo', 'Francis', 'Egypt Street', 'Lolas', 'DT', '13579', '1000468014680180', '201566', '460', 'angelo@gmail.com', 'secret123'),
     ('Rudy', 'Smith', 'Sign Street', 'Samo Ne Tu', 'MH', '09876', '1000123412341234', '170566', '134', 'rudy@gmail.com', 'userpass'),
     ('Jeannette', 'Stone', 'Snoop Street', 'Kojik', 'HW', '87654', '1000098109810981', '205166', '081', 'jeannette@gmail.com', 'mypassword'),
