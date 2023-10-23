@@ -12,33 +12,18 @@
         <table border="1" cellpadding="5">
             <caption><h2>List of People</h2></caption>
             <tr>
-				<th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>ZipCode</th>
-                <th>Credit Card Number</th>
-                <th>Expiration Date</th>
-                <th>CVV</th>
-                <th>Phone Number</th>
-                <th>Email</th>
+				<th>ID</th>
+				<th>Username</th>
                 <th>Password</th>
+                <th>Role</th>
 
             </tr>
             <c:forEach var="users" items="${listUser}">
                 <tr style="text-align:center">
-                    <td><c:out value="${user.FirstName}" /></td>
-                    <td><c:out value="${user.LastName}" /></td>
-					<td><c:out value="${user.Address}" /></td>
-                    <td><c:out value="${user.City}" /></td>
-                    <td><c:out value="${user.State}" /></td>
-                    <td><c:out value="${user.CreditCardNumber}" /></td>
-                    <td><c:out value="${user.ExpirationDate}" /></td>
-                    <td><c:out value="${user.CVV}"/></td>
-                    <td><c:out value="${user.PhoneNumber}" /></td>
-                    <td><c:out value="${user.Email}" /></td>
-                    <td><c:out value="${user.Passowrd}" /></td>
+                    <td><c:out value="${users.unique_id}" /></td>
+                    <td><c:out value="${users.username}" /></td>   
+                    <td><c:out value="${users.password}" /></td>
+                    <td><c:out value="${users.role_id}" /></td>
                 </tr>
             </c:forEach>
         </table>

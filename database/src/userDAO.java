@@ -50,12 +50,12 @@ public class userDAO
         }
     }
     
-    public boolean database_login(String email, String password) throws SQLException{
+    public boolean database_login(String username, String password) throws SQLException{
     	try {
-    		connect_func("root","pass1234");
-    		String sql = "select * from user where email = ?";
+    		connect_func();
+    		String sql = "select * from user where username = ?";
     		preparedStatement = connect.prepareStatement(sql);
-    		preparedStatement.setString(1, email);
+    		preparedStatement.setString(1, username);
     		ResultSet rs = preparedStatement.executeQuery();
     		return rs.next();
     	}
@@ -87,22 +87,14 @@ public class userDAO
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-        	String firstName = resultSet.getString("FirstName");
-        	String lastName = resultSet.getString("LastName");
-        	String address = resultSet.getString("Address"); 
-        	String city = resultSet.getString("City"); 
-        	String state = resultSet.getString("State"); 
-        	String zip_code = resultSet.getString("ZipCode"); 
-        	String credit_card_number = resultSet.getString("CreditCardNumber"); 
-        	String expiration_date = resultSet.getString("ExpirationDate"); 
-        	String cvv = resultSet.getString("CVV"); 
-        	String email = resultSet.getString("Email"); 
-        	String phoneNumber = resultSet.getString("PhoneNumber"); 
-        	String password = resultSet.getString("Password"); 
+        	int uniqueId = resultSet.getInt("unique_id");
+        	String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            int roleId = resultSet.getInt("role_id");
    
 
              
-            user users = new user(firstName, lastName, address, city, state, zip_code, credit_card_number, expiration_date, cvv, phoneNumber, email, password);
+            user users = new user(uniqueId, username, password, roleId);
             listUser.add(users);
         }        
         resultSet.close();
@@ -117,33 +109,25 @@ public class userDAO
     }
     
     public void insert(user users) throws SQLException {
-    	connect_func("root","pass1234");         
-    	String sql = "INSERT INTO User (FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, ExpirationDate, CVV, PhoneNumber, Email, Password) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-			preparedStatement.setString(1, users.getFirstName());
-			preparedStatement.setString(2, users.getLastName());
-			preparedStatement.setString(3, users.getAddress());
-			preparedStatement.setString(4, users.getCity());
-			preparedStatement.setString(5, users.getState());		
-			preparedStatement.setString(6, users.getZipCode());		
-			preparedStatement.setString(7, users.getCreditCardNumber());		
-			preparedStatement.setString(8, users.getExpirationDate());		
-			preparedStatement.setString(9, users.getCVV());	
-			preparedStatement.setString(10, users.getPhoneNumber());	
-			preparedStatement.setString(11, users.getEmail());		
-			preparedStatement.setString(12, users.getPassword());		
+    	connect_func();
+    	String sql = "insert into User(username, password, role_id) VALUES (?, ?, ?)";
+    	preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+    		preparedStatement.setString(1, users.getUsername());
+    		preparedStatement.setString(2, users.getPassword());
+    		preparedStatement.setInt(3, users.getRoleId());
+    		
 
-		preparedStatement.executeUpdate();
+    	preparedStatement.executeUpdate();
         preparedStatement.close();
     }
+
     
-    public boolean delete(String email) throws SQLException {
-        String sql = "DELETE FROM User WHERE email = ?";        
+    public boolean delete(String username) throws SQLException {
+        String sql = "DELETE FROM User WHERE username = ?";        
         connect_func();
          
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, email);
+        preparedStatement.setString(1, username);
          
         boolean rowDeleted = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
@@ -151,53 +135,31 @@ public class userDAO
     }
      
     public boolean update(user users) throws SQLException {
-        String sql = "update User set firstName = ?, lastName = ?, address = ?, city, state = ?, zip_code = ?, credit_card_number = ?, expiration_date = ?, cvv = ?, phoneNumber = ?, password = ? where email = ?";
-        connect_func();
-        
-		preparedStatement.setString(1, users.getEmail());
-		preparedStatement.setString(2, users.getFirstName());
-		preparedStatement.setString(3, users.getLastName());
-		preparedStatement.setString(4, users.getAddress());
-		preparedStatement.setString(5, users.getCity());
-		preparedStatement.setString(6, users.getState());		
-		preparedStatement.setString(7, users.getZipCode());		
-		preparedStatement.setString(8, users.getCreditCardNumber());		
-		preparedStatement.setString(9, users.getExpirationDate());		
-		preparedStatement.setString(10, users.getCVV());	
-		preparedStatement.setString(11, users.getPhoneNumber());	
-		preparedStatement.setString(12, users.getEmail());		
-		preparedStatement.setString(13, users.getPassword());	
+    	 String sql = "UPDATE User SET password = ?, role_id = ? WHERE username = ?";
+         connect_func();
+         
+         preparedStatement = connect.prepareStatement(sql);
+         preparedStatement.setString(1, users.getPassword());
+         preparedStatement.setInt(2, users.getRoleId());
+         preparedStatement.setString(3, users.getUsername());	
          
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
         return rowUpdated;     
     }
     
-    public user getUser(String email) throws SQLException {
+    public user getUser(String username) throws SQLException {
     	user user = null;
-        String sql = "SELECT * FROM User WHERE email = ?";
-         
+        String sql = "SELECT * FROM User WHERE username = ?";
         connect_func();
-         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, email);
-         
+        preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
-         
         if (resultSet.next()) {
-        	String firstName = resultSet.getString("FirstName");
-        	String lastName = resultSet.getString("LastName");
-        	String address = resultSet.getString("Address"); 
-        	String city = resultSet.getString("City"); 
-        	String state = resultSet.getString("State"); 
-        	String zip_code = resultSet.getString("ZipCode"); 
-        	String credit_card_number = resultSet.getString("CreditCardNumber"); 
-        	String expiration_date = resultSet.getString("ExpirationDate"); 
-        	String cvv = resultSet.getString("CVV");
-        	String phoneNumber = resultSet.getString("PhoneNumber"); 
-        	String password = resultSet.getString("Password"); 
-        	
-            user = new user(firstName, lastName, address, city, state, zip_code, credit_card_number, expiration_date, cvv, phoneNumber, password);
+            username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            int roleID = resultSet.getInt("role_id");
+            user = new user(username, password, roleID);
         }
          
         resultSet.close();
@@ -206,22 +168,22 @@ public class userDAO
         return user;
     }
     
-    public boolean checkEmail(String email) throws SQLException {
-    	boolean checks = false;
-    	String sql = "SELECT * FROM User WHERE email = ?";
-    	connect_func();
-    	preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, email);
+    public boolean checkUsername(String username) throws SQLException {
+        boolean checks = false;
+        String sql = "SELECT * FROM User WHERE username = ?";
+        connect_func();
+        preparedStatement = connect.prepareStatement(sql);
+        preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
         
-        System.out.println(checks);	
+        System.out.println(checks);
         
         if (resultSet.next()) {
         	checks = true;
         }
         
         System.out.println(checks);
-    	return checks;
+        return checks;
     }
     
     public boolean checkPassword(String password) throws SQLException {
@@ -244,7 +206,7 @@ public class userDAO
     
     
     
-    public boolean isValid(String email, String password) throws SQLException
+    public boolean isValid(String username, String password) throws SQLException
     {
     	String sql = "SELECT * FROM User";
     	connect_func();
@@ -259,7 +221,7 @@ public class userDAO
     	for(int i = 0; i < setSize; i++)
     	{
     		resultSet.next();
-    		if(resultSet.getString("email").equals(email) && resultSet.getString("password").equals(password)) {
+    		if(resultSet.getString("username").equals(username) && resultSet.getString("password").equals(password)) {
     			return true;
     		}		
     	}
@@ -268,38 +230,44 @@ public class userDAO
     
     
     public void init() throws SQLException, FileNotFoundException, IOException{
-    	connect_func();
-        statement =  (Statement) connect.createStatement();
         
-        String[] INITIAL = {"USE testdb; ",
-					        "DROP TABLE IF EXISTS User; ",
-					        ("CREATE TABLE IF NOT EXISTS User ( " +
-					            "CustomerID INT AUTO_INCREMENT PRIMARY KEY, " + 
-					            "FirstName VARCHAR(50) NOT NULL, " +
-					            "LastName VARCHAR(50) NOT NULL, " +
-					            "Address VARCHAR(100), " +
-					            "City VARCHAR(50), " +
-					            "State CHAR(2),  "+ 
-					            "ZipCode VARCHAR(5), "+ 
-					            "CreditCardNumber VARCHAR(16), " + 
-					            "ExpirationDate VARCHAR(6), "+ 
-					            "CVV CHAR(3), "+ 
-					            "PhoneNumber CHAR(10)," +
-					            "Email VARCHAR(100), "+ 
-					            "Password VARCHAR(255) NOT NULL ")
-        					};
-        String[] TUPLES = {("INSERT INTO User (FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, ExpirationDate, CVV, PhoneNumber, Email, Password)"+
-        			"values (('John', 'Doe', '123 Main St', 'New York', 'NY', '10001', '1234123412341234', '2000-01-15', '789', 'john@example.com', 'johnpass123'),\n"
-        			+ "    ('Alice', 'Johnson', '456 Elm St', 'Los Angeles', 'CA', '90001', '5678567856785678', '1998-03-20', '456', 'alice@example.com', 'alicepass123'),\n"
-        			+ "    ('Michael', 'Smith', '789 Oak St', 'Chicago', 'IL', '60601', '9876987698769876', '2002-05-10', '234', 'michael@example.com', 'michaelpass123'),\n"
-        			+ "    ('Emily', 'Brown', '321 Pine St', 'Houston', 'TX', '77001', '7654765476547654', '1995-11-30', '654', 'emily@example.com', 'emilypass123'),\n"
-        			+ "    ('David', 'Lee', '654 Birch St', 'Miami', 'FL', '33101', '8765876587658765', '1990-08-12', '321', 'david@example.com', 'davidpass123'),\n"
-        			+ "    ('Sophia', 'Martinez', '987 Cedar St', 'San Francisco', 'CA', '94101', '3456345634563456', '2005-02-25', '987', 'sophia@example.com', 'sophiapass123'),\n"
-        			+ "    ('Liam', 'Garcia', '741 Willow St', 'Dallas', 'TX', '75201', '2345234523452345', '1997-07-05', '567', 'liam@example.com', 'liampass123'),\n"
-        			+ "    ('Olivia', 'Perez', '369 Redwood St', 'Atlanta', 'GA', '30301', '4321432143214321', '2001-04-15', '123', 'olivia@example.com', 'oliviapass123'),\n"
-        			+ "    ('Noah', 'Rodriguez', '852 Sycamore St', 'Seattle', 'WA', '98101', '8765876587658765', '1992-09-08', '876', 'noah@example.com', 'noahpass123'),\n"
-        			+ "    ('Ava', 'Sanchez', '123 Pineapple St', 'Denver', 'CO', '80201', '7654765476547654', '1994-12-10', '345', 'ava@example.com', 'avapass123');")
-			    	};
+        connect_func();
+        statement =  (Statement) connect.createStatement();
+
+        String[] INITIAL = {
+            "DROP DATABASE IF EXISTS testdb;",
+            "CREATE DATABASE testdb;",
+            "USE testdb;",
+            "DROP TABLE IF EXISTS User;",
+            "DROP TABLE IF EXISTS Role;",
+            "CREATE TABLE Role ( " +
+            "    role_id INT AUTO_INCREMENT PRIMARY KEY, " +
+            "    role_name VARCHAR(255) NOT NULL UNIQUE " +
+            ");",
+            "CREATE TABLE User ( " +
+            "    unique_id INT AUTO_INCREMENT PRIMARY KEY, " +
+            "    username VARCHAR(255) NOT NULL UNIQUE, " +
+            "    password VARCHAR(255) NOT NULL, " +
+            "    role_id INT, " +
+            "    FOREIGN KEY (role_id) REFERENCES Role(role_id) " +
+            ");"
+        };
+
+        String[] TUPLES = {
+            "INSERT INTO Role (role_name) VALUES ('user');",
+            "INSERT INTO Role (role_name) VALUES ('root');",
+            "INSERT INTO Role (role_name) VALUES ('david');",
+                "INSERT INTO User (username, password, role_id) VALUES ('John', 'johnpass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Alice', 'alicepass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Michael', 'michaelpass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Emily', 'emilypass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('David', 'davidpass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Sophia', 'sophiapass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Liam', 'liampass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Olivia', 'oliviapass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Noah', 'noahpass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Ava', 'avapass123', 1);"
+            };
         
         //for loop to put these in database
         for (int i = 0; i < INITIAL.length; i++)
@@ -308,15 +276,4 @@ public class userDAO
         	statement.execute(TUPLES[i]);
         disconnect();
     }
-    
-    
-   
-    
-    
-    
-    
-    
-	
-	
-
 }

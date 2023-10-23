@@ -16,34 +16,18 @@
         <table border="1" cellpadding="6">
             <caption><h2>List of Users</h2></caption>
             <tr>
-				<th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>ZipCode</th>
-                <th>Credit Card Number</th>
-                <th>Expiration Date</th>
-                <th>CVV</th>
-                <th>Phone Number</th>
-                <th>Email</th>
+				<th>ID</th>
+				<th>Username</th>
                 <th>Password</th>
+                <th>Role</th>
 
             </tr>
             <c:forEach var="user" items="${get_user}">
                 <tr style="text-align:center">
-                    <td>"${user.FirstName}" </td>
-                    <td>"${user.LastName}"</td>
-                    <td>"${user.Address}"</td>
-                    <td>"${user.City}"</td>
-                    <td>"${user.State}"</td>
-                    <td>"${user.ZipCode}"</td>
-                    <td>"${user.CreditCardNumber}"</td>
-                    <td>"${user.ExpirationDate}"</td>
-                    <td>"${user.CVV}"</td>
-                    <td>"${user.PhoneNumber}"</td>
-                    <td>"${user.Email}"</td>
-                    <td>"${user.Password}"</td>
+                    <td>"${user.unique_id}" </td>
+                    <td>"${user.username}"</td>
+                    <td>"${user.password}"</td>
+                    <td>"${user.role_id}"</td>
                  </tr>
             </c:forEach>
           </table>

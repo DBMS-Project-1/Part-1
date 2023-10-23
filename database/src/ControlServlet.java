@@ -18,6 +18,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.io.PrintWriter;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+ 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 
 public class ControlServlet extends HttpServlet {
@@ -102,25 +121,25 @@ public class ControlServlet extends HttpServlet {
 	    
 	    
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-	    	 String email = request.getParameter("email");
+	    	 String username = request.getParameter("username");
 	    	 String password = request.getParameter("password");
 	    	 
-	    	 if (email.equals("root") && password.equals("pass1234")) {
+	    	 if (username.equals("root") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
-				 session.setAttribute("username", email);
+				 session.setAttribute("username", username);
 				 rootPage(request, response, "");
 	    	 }
-	    	 if (email.equals("David Smith") && password.equals("pass1234")) {
+	    	 if (username.equals("David_Smith") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to David Smith");
 				 session = request.getSession();
-				 session.setAttribute("username", email);
+				 session.setAttribute("username", username);
 				 davidSmith(request, response, "");
 	    	 }
-	    	 else if(userDAO.isValid(email, password)) 
+	    	 else if(userDAO.isValid(username, password)) 
 	    	 {
 			 	 
-			 	 currentUser = email;
+			 	 currentUser = username;
 				 System.out.println("Login Successful! Redirecting");
 				 request.getRequestDispatcher("activitypage.jsp").forward(request, response);
 			 			 			 			 
@@ -132,24 +151,15 @@ public class ControlServlet extends HttpServlet {
 	    }
 	           
 	    private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        	String firstName = request.getParameter("FirstName");
-        	String lastName = request.getParameter("LastName");
-        	String address = request.getParameter("Address"); 
-        	String city = request.getParameter("City"); 
-        	String state = request.getParameter("State"); 
-        	String zip_code = request.getParameter("ZipCode"); 
-        	String credit_card_number = request.getParameter("CreditCardNumber");
-        	String expiration_date = request.getParameter("ExpirationDate");
-        	String cvv = request.getParameter("CVV");
-        	String phoneNumber = request.getParameter("PhoneNumber");
-        	String email = request.getParameter("Email"); 
-        	String password = request.getParameter("Password"); 	   	 	
-	   	 	String confirm = request.getParameter("Confirmation");
+	    	String username = request.getParameter("Username");
+	        String password = request.getParameter("Password");
+	        String confirm = request.getParameter("Confirmation");
+	        int roleID = 1;
 	   	 	
-	   	 	if (password.equals(confirm)) {
-	   	 		if (!userDAO.checkEmail(email)) {
+	        if (password.equals(confirm)) {
+	   	 		if (!userDAO.checkUsername(username)) {
 		   	 		System.out.println("Registration Successful! Added to database");
-		            user users = new user(firstName, lastName, address, city, state, zip_code, credit_card_number, expiration_date, cvv, phoneNumber, email, password);
+		            user users = new user(username, password, roleID);
 		   	 		userDAO.insert(users);
 		   	 		response.sendRedirect("login.jsp");
 	   	 		}

@@ -1,129 +1,61 @@
 public class user 
 {
-		protected String FirstName;
-	 	protected String LastName;
-	    protected String Address;
-	    protected String City;
-	    protected String State;
-	    protected String ZipCode;
-	    protected String CreditCardNumber;
-	    protected String ExpirationDate;
-	    protected String CVV;
-	    protected String PhoneNumber;
-	    protected String Email;
-	    protected String Password;
+		protected int unique_id;
+		protected String username;
+		protected String password;
+		protected int role_id;
 
 	 
 	    //constructors
 	    public user() {
 	    }
 	 
-	    public user(String email) 
+	    public user(String username) 
 	    {
-	        this.Email = email;
+	        this.username = username;
 	    }
 
-	    public user(String FirstName,String LastName, String Address, String City, String State, String ZipCode, String CreditCardNumber, String expiration_date, String CVV, String phoneNumber, String Email, String Password) 
-	    {
-	    	this(FirstName, LastName, Address, City, State, ZipCode, CreditCardNumber, expiration_date, CVV, phoneNumber, Password);
-	    	this.Email = Email;
+	    public user(String username, String password, int RoleID) {
+	        this.username = username;
+	        this.password = password;
+	        this.role_id = RoleID;
+	    }
+	    
+	    public user(int uniqueId,String username, String password, int RoleID) {
+	    	this.unique_id = uniqueId;
+	        this.username = username;
+	        this.password = password;
+	        this.role_id = RoleID;
 	    }
 	 
-	
-	    public user(String FirstName,String LastName, String Address, String City, String State, String ZipCode, String CreditCardNumber, String expiration_date, String CVV, String phoneNumber, String Password) 
-	    {
-	    	this.FirstName = FirstName;
-	    	this.LastName = LastName;
-	    	this.Address = Address;
-	        this.City = City;
-	        this.State = State;
-	        this.ZipCode = ZipCode;
-	        this.CreditCardNumber= CreditCardNumber;
-	        this.ExpirationDate= expiration_date;
-	        this.CVV = CVV;
-	        this.PhoneNumber = phoneNumber;
-	        this.Password = Password;
-	    }
 	    
 	   //getter and setter methods
 	    
-	    public String getFirstName() {
-	        return FirstName;
+	    public int getUniqueId() {
+	        return unique_id;
 	    }
-	    public void setFirstName(String firstName) {
-	        this.FirstName = firstName;
-	    }
-	    
-	    public String getLastName() {
-	        return LastName;
-	    }
-	    public void setLastName(String lastName) {
-	        this.LastName = lastName;
+	    public void setUniqueId(int unique_id) {
+	        this.unique_id = unique_id;
 	    }
 	    
-	    public String getAddress() {
-	        return Address;
+	    public String getUsername() {
+	        return username;
 	    }
-	    public void setAdress(String adress) {
-	        this.Address = adress;
-	    }
-	    public String getCity() {
-	        return City;
-	    }
-	    public void setCity(String city) {
-	        this.City = city;
-	    }
-	    public String getState() {
-	        return State;
-	    }
-	    public void setState(String state) {
-	        this.State = state;
-	    }
-	    public String getZipCode() {
-	        return ZipCode;
-	    }
-	    public void setZipCode(String zipCode) {
-	        this.ZipCode = zipCode;
-	    }
-	    public String getCreditCardNumber() {
-	        return CreditCardNumber;
-	    }
-	    public void setCreditCardNumber(String creditCardNumber) {
-	        this.CreditCardNumber = creditCardNumber;
-	    }
-	    
-	    public String getExpirationDate() {
-	        return ExpirationDate;
-	    }
-	    public void setExpirationDate(String expirationDate) {
-	        this.ExpirationDate = expirationDate;
-	    }
-	    
-	    public String getCVV() {
-	    	return CVV;
-	    }
-	    public void setCVV(String cvv) {
-	    	this.CVV = cvv;
-	    }
-	    
-	    public String getEmail() {
-	    	return Email;
-	    }
-	    public void setEmail(String email) {
-	    	this.Email = email;
+	    public void setUsername(String username) {
+	        this.username = username;
 	    }
 	    
 	    public String getPassword() {
-	    	return Password;
+	        return password;
 	    }
 	    public void setPassword(String password) {
-	    	this.Password = password;
+	        this.password = password;
 	    }
 	    
-	    public String getPhoneNumber() {
-	    	return PhoneNumber;
+	    public int getRoleId() {
+	        return role_id;
 	    }
-	    public void setPhoneNumber(String phoneNumber) {
-	    	this.PhoneNumber = phoneNumber;
+	    public void setRoleId(int role_id) {
+	        this.role_id = role_id;
 	    }
 	}

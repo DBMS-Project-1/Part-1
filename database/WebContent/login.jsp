@@ -12,10 +12,22 @@
 		<p> ${loginFailedStr} </p>
 		<form action="login" method="post">
 			<table border="1" cellpadding="5">
+				<li>
+					<span class="role-label">ROLES:</span>
+					
+					<input type="radio" name="role" value="user" id="userRole">
+					<label for="userRole">User</label>
+					
+					<input type="radio" name="role" value="root" id="rootRole">
+					<label for="rootRole">Root</label>
+					
+					<input type="radio" name="role" value="davidsmith" id="davidsmithRole">
+					<label for="davidsmithRole">David Smith</label>
+				</li>
 				<tr>
 					<th>Email: </th>
 					<td>
-						<input type="text" name="email" size="45" autofocus>
+						<input type="text" name="username" size="45" autofocus>
 					</td>
 				</tr>
 				<tr>
