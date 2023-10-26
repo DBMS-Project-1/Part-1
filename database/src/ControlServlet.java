@@ -123,6 +123,8 @@ public class ControlServlet extends HttpServlet {
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String username = request.getParameter("username");
 	    	 String password = request.getParameter("password");
+
+		       
 	    	 
 	    	 if (username.equals("root") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to root");
@@ -130,7 +132,7 @@ public class ControlServlet extends HttpServlet {
 				 session.setAttribute("username", username);
 				 rootPage(request, response, "");
 	    	 }
-	    	 if (username.equals("David_Smith") && password.equals("pass1234")) {
+	    	 if (username.equals("David Smith") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to David Smith");
 				 session = request.getSession();
 				 session.setAttribute("username", username);
@@ -154,8 +156,21 @@ public class ControlServlet extends HttpServlet {
 	    	String username = request.getParameter("Username");
 	        String password = request.getParameter("Password");
 	        String confirm = request.getParameter("Confirmation");
+	        String roleID_String = request.getParameter("role");
 	        int roleID = 1;
-	   	 	
+	        
+	        if (roleID_String.equals("user")) {
+	        	roleID = 1;
+	        }
+	        else if (roleID_String.equals("root")) {
+	        	roleID = 2;
+	        }
+	        else if (roleID_String.equals("davidsmith")) {
+	        	roleID = 3;
+	        }
+	        
+	        System.out.println("Role ID: " + roleID_String);
+	        
 	        if (password.equals(confirm)) {
 	   	 		if (!userDAO.checkUsername(username)) {
 		   	 		System.out.println("Registration Successful! Added to database");

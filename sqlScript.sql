@@ -24,7 +24,7 @@ VALUES
 INSERT INTO User (username, password, role_id)
 VALUES 
 	('root', 'pass1234', 2),
-	('David_Smith', 'pass1234', 3),
+	('David Smith', 'pass1234', 3),
 	('user1', 'pass1', 1),
 	('user2', 'pass2', 1),
 	('user3', 'pass3', 1),
