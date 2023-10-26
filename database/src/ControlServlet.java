@@ -123,8 +123,6 @@ public class ControlServlet extends HttpServlet {
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String username = request.getParameter("username");
 	    	 String password = request.getParameter("password");
-
-		       
 	    	 
 	    	 if (username.equals("root") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to root");

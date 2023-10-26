@@ -1,6 +1,5 @@
 public class user 
 {
-		protected int unique_id;
 		protected String username;
 		protected String password;
 		protected int role_id;
@@ -15,28 +14,18 @@ public class user
 	        this.username = username;
 	    }
 
-	    public user(String username, String password, int RoleID) {
+	    public user(String username, String password, int roleID) {
+	    	this(password,roleID);
 	        this.username = username;
-	        this.password = password;
-	        this.role_id = RoleID;
 	    }
 	    
-	    public user(int uniqueId,String username, String password, int RoleID) {
-	    	this.unique_id = uniqueId;
-	        this.username = username;
-	        this.password = password;
-	        this.role_id = RoleID;
+	    public user(String password, int roleID) {
+	    	this.password = password;
+	    	this.role_id = roleID;
 	    }
-	 
+	    
 	    
 	   //getter and setter methods
-	    
-	    public int getUniqueId() {
-	        return unique_id;
-	    }
-	    public void setUniqueId(int unique_id) {
-	        this.unique_id = unique_id;
-	    }
 	    
 	    public String getUsername() {
 	        return username;

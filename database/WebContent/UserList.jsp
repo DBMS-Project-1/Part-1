@@ -7,26 +7,13 @@
 <head>
     <title>All User list</title>
 </head>
-<body>
-   <div align="center">
-        <table border="1" cellpadding="5">
-            <caption><h2>List of People</h2></caption>
-            <tr>
-				<th>ID</th>
-				<th>Username</th>
-                <th>Password</th>
-                <th>Role</th>
 
-            </tr>
-            <c:forEach var="users" items="${listUser}">
-                <tr style="text-align:center">
-                    <td><c:out value="${users.unique_id}" /></td>
-                    <td><c:out value="${users.username}" /></td>   
-                    <td><c:out value="${users.password}" /></td>
-                    <td><c:out value="${users.role_id}" /></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>   
-</body>
+<center><h1>User list</h1> </center>
+
+ 
+	<body>
+	 <center>
+		 <p>User list view</p>
+		 </center>
+	</body>
 </html>

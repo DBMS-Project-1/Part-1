@@ -9,30 +9,12 @@
 <title>Insert title here</title>
 </head>
 
-<a href="login.jsp"target ="_self" > logout</a><br><br> 
+<center><h1>User</h1> </center>
 
-<h1>List all users</h1>
-    <div align="center">
-        <table border="1" cellpadding="6">
-            <caption><h2>List of Users</h2></caption>
-            <tr>
-				<th>ID</th>
-				<th>Username</th>
-                <th>Password</th>
-                <th>Role</th>
-
-            </tr>
-            <c:forEach var="user" items="${get_user}">
-                <tr style="text-align:center">
-                    <td>"${user.unique_id}" </td>
-                    <td>"${user.username}"</td>
-                    <td>"${user.password}"</td>
-                    <td>"${user.role_id}"</td>
-                 </tr>
-            </c:forEach>
-          </table>
-	</div>
-<body>
-
-</body>
+ 
+	<body>
+	 <center>
+		 <p>User view</p>
+		 </center>
+	</body>
 </html>

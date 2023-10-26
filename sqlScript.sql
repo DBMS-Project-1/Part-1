@@ -21,18 +21,18 @@ VALUES
 	('root'),
 	('david');
 
-INSERT INTO User (username, password, role_id)
+INSERT IGNORE INTO User (username, password, role_id)
 VALUES 
 	('root', 'pass1234', 2),
 	('David Smith', 'pass1234', 3),
-	('user1', 'pass1', 1),
-	('user2', 'pass2', 1),
-	('user3', 'pass3', 1),
-	('user4', 'pass4', 1),
-	('user5', 'pass5', 1),
-	('user6', 'pass6', 1),
-	('user7', 'pass7', 1),
-	('user8', 'pass8', 1);
+	('user1@gmail.com', 'pass1', 1),
+	('user2@gmail.com', 'pass2', 1),
+	('user3@gmail.com', 'pass3', 1),
+	('user4@gmail.com', 'pass4', 1),
+	('user5@gmail.com', 'pass5', 1),
+	('user6@gmail.com', 'pass6', 1),
+	('user7@gmail.com', 'pass7', 1),
+	('user8@gmail.com', 'pass8', 1);
 
 SELECT * FROM Role;
 SELECT * FROM User;

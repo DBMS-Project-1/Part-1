@@ -53,7 +53,7 @@ public class userDAO
     public boolean database_login(String username, String password) throws SQLException{
     	try {
     		connect_func();
-    		String sql = "select * from user where username = ?";
+    		String sql = "select * from User where username = ?";
     		preparedStatement = connect.prepareStatement(sql);
     		preparedStatement.setString(1, username);
     		ResultSet rs = preparedStatement.executeQuery();
@@ -87,14 +87,13 @@ public class userDAO
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-        	int uniqueId = resultSet.getInt("unique_id");
         	String username = resultSet.getString("username");
             String password = resultSet.getString("password");
             int roleId = resultSet.getInt("role_id");
    
 
              
-            user users = new user(uniqueId, username, password, roleId);
+            user users = new user(username, password, roleId);
             listUser.add(users);
         }        
         resultSet.close();
@@ -156,7 +155,6 @@ public class userDAO
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            username = resultSet.getString("username");
             String password = resultSet.getString("password");
             int roleID = resultSet.getInt("role_id");
             user = new user(username, password, roleID);
@@ -257,16 +255,16 @@ public class userDAO
             "INSERT INTO Role (role_name) VALUES ('user');",
             "INSERT INTO Role (role_name) VALUES ('root');",
             "INSERT INTO Role (role_name) VALUES ('david');",
-                "INSERT INTO User (username, password, role_id) VALUES ('John', 'johnpass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Alice', 'alicepass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Michael', 'michaelpass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Emily', 'emilypass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('David', 'davidpass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Sophia', 'sophiapass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Liam', 'liampass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Olivia', 'oliviapass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Noah', 'noahpass123', 1);",
-                "INSERT INTO User (username, password, role_id) VALUES ('Ava', 'avapass123', 1);"
+                "INSERT INTO User (username, password, role_id) VALUES ('root', 'pass1234', 2);",
+                "INSERT INTO User (username, password, role_id) VALUES ('David Smith', 'pass1234', 3);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Michael@gmail.com', 'michaelpass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Emily@gmail.com', 'emilypass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('David@gmail.com', 'davidpass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Sophia@gmail.com', 'sophiapass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Liam@gmail.com', 'liampass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Olivia@gmail.com', 'oliviapass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Noah@gmail.com', 'noahpass123', 1);",
+                "INSERT INTO User (username, password, role_id) VALUES ('Ava@gmail.com', 'avapass123', 1);"
             };
         
         //for loop to put these in database

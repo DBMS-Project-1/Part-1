@@ -17,26 +17,7 @@
 	</form>
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 
-<h1>List all users</h1>
-    <div align="center">
-        <table border="1" cellpadding="6">
-            <caption><h2>List of Users</h2></caption>
-            <tr>
-            	<th>ID</th>
-				<th>Username</th>
-                <th>Password</th>
-                <th>Role</th>
-            </tr>
-            <c:forEach var="users" items="${listUser}">
-                <tr style="text-align:center">
-                    <td><c:out value="${user.unique_id}" /></td>
-                    <td><c:out value="${user.username}" /></td>   
-                    <td><c:out value="${user.password}" /></td>
-                    <td><c:out value="${user.role_id}" /></td>
-            </c:forEach>
-        </table>
-	</div>
-	</div>
+<center><h1>Root View</h1> </center>
 
-</body>
+ 
 </html>

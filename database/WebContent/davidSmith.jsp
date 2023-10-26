@@ -15,7 +15,7 @@
 	<body>
 	 <center>
 		 <a href="login.jsp"target ="_self" > logout</a><br><br> 
-		 <p>Example Paragraph</p>
+		 <p>David Smith view</p>
 		 </center>
 	</body>
 </html>
