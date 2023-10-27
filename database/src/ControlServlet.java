@@ -138,10 +138,24 @@ public class ControlServlet extends HttpServlet {
 	    	 }
 	    	 else if(userDAO.isValid(username, password)) 
 	    	 {
-			 	 
-			 	 currentUser = username;
-				 System.out.println("Login Successful! Redirecting");
-				 request.getRequestDispatcher("activitypage.jsp").forward(request, response);
+	    		 int role_ID = userDAO.getRoleID(username);
+	    		 if (role_ID == 1) {
+	    			 currentUser = username;
+					 System.out.println("Login Successful! Redirecting");
+					 request.getRequestDispatcher("activitypage.jsp").forward(request, response);
+	    		 }
+	    		 if (role_ID == 2) {
+	    			 System.out.println("Login Successful! Redirecting to root");
+					 session = request.getSession();
+					 session.setAttribute("username", username);
+					 rootPage(request, response, "");
+	    		 }
+	    		 if (role_ID == 3) {
+	    			 System.out.println("Login Successful! Redirecting to David Smith");
+					 session = request.getSession();
+					 session.setAttribute("username", username);
+					 davidSmith(request, response, "");
+	    		 }
 			 			 			 			 
 	    	 }
 	    	 else {

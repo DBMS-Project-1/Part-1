@@ -166,6 +166,24 @@ public class userDAO
         return user;
     }
     
+    public int getRoleID(String username) throws SQLException {
+        int roleID = 0;
+        String sql = "SELECT role_id FROM User WHERE username = ?";
+        connect_func();
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setString(1, username);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            roleID = resultSet.getInt("role_id");
+        }
+         
+        resultSet.close();
+        statement.close();
+         
+        return roleID;
+    }
+    
     public boolean checkUsername(String username) throws SQLException {
         boolean checks = false;
         String sql = "SELECT * FROM User WHERE username = ?";
