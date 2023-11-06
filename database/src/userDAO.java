@@ -20,6 +20,8 @@ import java.sql.ResultSet;
 //import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigDecimal;
+
 /**
  * Servlet implementation class Connect
  */
@@ -90,8 +92,6 @@ public class userDAO
         	String username = resultSet.getString("username");
             String password = resultSet.getString("password");
             int roleId = resultSet.getInt("role_id");
-   
-
              
             user users = new user(username, password, roleId);
             listUser.add(users);
@@ -108,17 +108,45 @@ public class userDAO
     }
     
     public void insert(user users) throws SQLException {
-    	connect_func();
-    	String sql = "insert into User(username, password, role_id) VALUES (?, ?, ?)";
-    	preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-    		preparedStatement.setString(1, users.getUsername());
-    		preparedStatement.setString(2, users.getPassword());
-    		preparedStatement.setInt(3, users.getRoleId());
-    		
+        connect_func();
+        String sql = "insert into User(username, password, role_id) VALUES (?, ?, ?)";
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setString(1, users.getUsername());
+        preparedStatement.setString(2, users.getPassword());
+        preparedStatement.setInt(3, users.getRoleId());
+     
 
-    	preparedStatement.executeUpdate();
+        preparedStatement.executeUpdate();
         preparedStatement.close();
     }
+
+
+
+
+    public void setQuote_id(user users) throws SQLException {
+        connect_func();
+        
+        String sql = "SELECT unique_id FROM User WHERE username = ?";
+        preparedStatement = connect.prepareStatement(sql);
+        preparedStatement.setString(1, users.getUsername());
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            int unique_id = resultSet.getInt("unique_id");
+            System.out.println("Unique ID for username '" + users.getUsername() + "': " + unique_id);
+            users.setQuote_id(unique_id);
+            System.out.println("username: " + users.getUsername() + " has a quote_id of: " + users.getQuote_id());
+        } else {
+            System.out.println("No user found with username '" + users.getUsername() + "'");
+        }
+        
+        resultSet.close();
+        preparedStatement.close();
+
+    }
+
+
 
     
     public boolean delete(String username) throws SQLException {

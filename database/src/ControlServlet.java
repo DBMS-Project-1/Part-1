@@ -87,6 +87,10 @@ public class ControlServlet extends HttpServlet {
                  System.out.println("The action is: list");
                  listUser(request, response);           	
                  break;
+        	 case "/submitQuote":
+        		 System.out.println("The action is: submitQuote");
+        		 submitQuote(request,response);
+        		 break;
 	    	}
 	    }
 	    catch(Exception ex) {
@@ -118,6 +122,43 @@ public class ControlServlet extends HttpServlet {
 			request.setAttribute("listUser", userDAO.listAllUsers());
 	    	request.getRequestDispatcher("davidSmith.jsp").forward(request, response);
 	    }
+	    
+	    protected void submitQuote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	        String num_of_treesStr = request.getParameter("num_of_trees");
+	        String budgetStr = request.getParameter("budget");
+
+	        int num_of_trees = 0; // Initialize to a default value (or handle exceptions if parsing fails)
+	        double budget = 0; // Initialize to a default value (or handle exceptions if parsing fails)
+
+	        // Check if the data is valid (you may need more validation)
+	        if (num_of_treesStr != null && budgetStr != null) {
+	            try {
+	                // Attempt to parse the budget string into an integer
+	            	num_of_trees = Integer.parseInt(num_of_treesStr);
+	            	budget = Double.parseDouble(budgetStr);
+
+	                // Create a new Quote object with num_of_trees as a string and budget as an integer
+	                Quote quote = new Quote(num_of_trees, budget);
+
+	                // Insert the quote into the database using a QuoteDAO
+	                QuoteDAO quoteDAO = new QuoteDAO(); // Initialize your DAO class
+	                quoteDAO.insert(quote); // Implement this method in your DAO to insert the quote into the database
+
+	                // Redirect to a confirmation page or perform other actions
+	                //response.sendRedirect("quoteConfirmation.jsp");
+	            } catch (NumberFormatException e) {
+	                // Handle the case where budget is not a valid integer
+	                request.setAttribute("error", "Invalid budget. Please enter a valid number.");
+	                request.getRequestDispatcher("activity.jsp").forward(request, response);
+	            }
+	        } else {
+	            // Handle invalid data
+	            request.setAttribute("error", "Invalid data. Please fill out all fields.");
+	            request.getRequestDispatcher("quoteForm.jsp").forward(request, response);
+	        }
+	    }
+
+
 	    
 	    
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -181,6 +222,7 @@ public class ControlServlet extends HttpServlet {
 	        	roleID = 3;
 	        }
 	        
+	        
 	        System.out.println("Role ID: " + roleID_String);
 	        
 	        if (password.equals(confirm)) {
@@ -188,6 +230,7 @@ public class ControlServlet extends HttpServlet {
 		   	 		System.out.println("Registration Successful! Added to database");
 		            user users = new user(username, password, roleID);
 		   	 		userDAO.insert(users);
+		   	 		userDAO.setQuote_id(users);
 		   	 		response.sendRedirect("login.jsp");
 	   	 		}
 		   	 	else {
