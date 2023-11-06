@@ -5,6 +5,11 @@
    Open the unzipped folder you downloaded > Select Folder > Select all folders > finish
 
 
+`PROJECT VIDEO`
+here is the link to the video of our project and an explanation of the ER diagram:
+https://youtu.be/Rb3Di5zdsjg
+
+
 `PROJECT CONTRIBUTIONS`
 
 Issa - 8 hours
