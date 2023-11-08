@@ -41,7 +41,14 @@ VALUES
 	('user5@gmail.com', 'pass5', 1),
 	('user6@gmail.com', 'pass6', 1),
 	('user7@gmail.com', 'pass7', 1),
-	('user8@gmail.com', 'pass8', 1);
+	('user8@gmail.com', 'pass8', 1),
+    ('test@gmail.com', 'test', 1);
+    
+INSERT IGNORE INTO Quote (num_of_trees, budget)
+VALUES
+	(3, 10),
+    (2, 11),
+    (1, 7);
 
 SELECT * FROM Role;
 SELECT * FROM User;

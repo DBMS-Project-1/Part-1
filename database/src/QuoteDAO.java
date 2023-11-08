@@ -21,10 +21,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@WebServlet("/QuoteDAO")
+
 public class QuoteDAO {
     private Connection connect = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    private Statement statement = null;
 
     public QuoteDAO() {
         // Initialize the database connection in the constructor
@@ -36,7 +40,7 @@ public class QuoteDAO {
             // Establish the database connection
             // Modify the connection URL, username, and password as needed
             String dbUrl = "jdbc:mysql://127.0.0.1:3306/testdb";
-            String dbUser = "root";
+            String dbUser = "john";
             String dbPassword = "pass1234";
 
             connect = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
@@ -59,7 +63,38 @@ public class QuoteDAO {
             closeResources();
         }
     }
-
+    
+    
+    /*
+     * should list all quotes
+     * listAllUsers from userDAO.java does not work so this might also not work
+     * maybe not retrieving the correct attributes from resultSet
+     */
+    public List<Quote> listAllQuotes() throws SQLException {
+    	
+    	List<Quote> listQuote = new ArrayList<Quote>();
+    	String sql = "SELECT * FROM Quote";
+    	
+    	connectToDatabase();
+    	
+    	statement = (Statement) connect.createStatement();
+    	ResultSet resultSet = statement.executeQuery(sql);
+    	
+    	while (resultSet.next()) {
+    		//int quoteID = resultSet.getInt("quote_id");
+    		int numTrees = resultSet.getInt("num_of_trees");
+    		float budget = resultSet.getFloat("budget");
+    		
+    		Quote quotes = new Quote(numTrees, budget);
+    		listQuote.add(quotes);
+    	}
+    	
+    	closeResources();
+    	
+    	return listQuote;
+    }
+    
+    
     // You can add more methods like listAllQuotes, delete, update, etc., if needed
 
     private void closeResources() {

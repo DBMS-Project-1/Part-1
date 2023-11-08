@@ -42,6 +42,7 @@ import java.sql.PreparedStatement;
 public class ControlServlet extends HttpServlet {
 	    private static final long serialVersionUID = 1L;
 	    private userDAO userDAO = new userDAO();
+	    private QuoteDAO QuoteDAO = new QuoteDAO();
 	    private String currentUser;
 	    private HttpSession session=null;
 	    
@@ -53,6 +54,7 @@ public class ControlServlet extends HttpServlet {
 	    public void init()
 	    {
 	    	userDAO = new userDAO();
+	    	QuoteDAO = new QuoteDAO();
 	    	currentUser= "";
 	    }
 	    
@@ -84,9 +86,12 @@ public class ControlServlet extends HttpServlet {
         		logout(request,response);
         		break;
         	 case "/list": 
-                 System.out.println("The action is: list");
+                 System.out.println("The action is: listUser");
                  listUser(request, response);           	
                  break;
+        	 case "/listQuotes":
+        		 System.out.println("The action is: listQuotes");
+        		 listQuote(request, response);
         	 case "/submitQuote":
         		 System.out.println("The action is: submitQuote");
         		 submitQuote(request,response);
@@ -108,18 +113,33 @@ public class ControlServlet extends HttpServlet {
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");       
 	        dispatcher.forward(request, response);
 	     
-	        System.out.println("listPeople finished: 111111111111111111111111111111111111");
+	        System.out.println("listUser finished: 111111111111111111111111111111111111");
+	    }
+	    
+	    private void listQuote(HttpServletRequest request, HttpServletResponse response) 
+	    		throws SQLException, IOException, ServletException {
+	        System.out.println("listQuote started: 00000000000000000000000000000000000");
+	        
+	        List<Quote> listQuote = QuoteDAO.listAllQuotes();
+	        request.setAttribute("listQuote", listQuote);
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("QuoteList.jsp");
+	        dispatcher.forward(request, response);
+	        
+	        System.out.println("listQuote finished: 111111111111111111111111111111111111");
+
 	    }
 	    	        
 	    private void rootPage(HttpServletRequest request, HttpServletResponse response, String view) throws ServletException, IOException, SQLException{
 	    	System.out.println("root view");
 			request.setAttribute("listUser", userDAO.listAllUsers());
+			request.setAttribute("listQuotes", QuoteDAO.listAllQuotes());
 	    	request.getRequestDispatcher("rootView.jsp").forward(request, response);
 	    }
 	    
 	    private void davidSmith(HttpServletRequest request, HttpServletResponse response, String view) throws ServletException, IOException, SQLException{
 	    	System.out.println("David Smith");
 			request.setAttribute("listUser", userDAO.listAllUsers());
+			request.setAttribute("listQuotes", QuoteDAO.listAllQuotes());
 	    	request.getRequestDispatcher("davidSmith.jsp").forward(request, response);
 	    }
 	    

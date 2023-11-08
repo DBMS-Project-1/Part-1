@@ -16,5 +16,7 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/rorylange/Desktop/csc4710/Project-1/database/src/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="/Users/rorylange/Desktop/csc4710/Project-1/database/src/mysql-connector-java-5.1.32-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
